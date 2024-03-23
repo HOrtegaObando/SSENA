@@ -1,0 +1,147 @@
+#include <iostream>
+
+using namespace std;
+
+void ordenar(int vec[]);
+void imprimir(int vec[]);
+
+int main()
+{
+    int vec[11] = {12,11,1,2,3,4,5,6,7,8,9}; // Se corrigió el nombre del array
+
+    ordenar(vec); // Llamada a la función para ordenar el arreglo
+    imprimir(vec); // Llamada a la función para imprimir el arreglo ordenado
+
+    return 0;
+}
+
+void ordenar(int vec[])
+{
+    int i, j, aux;
+
+    for (i = 0; i < 11; i++)
+    {
+        for (j = i + 1; j < 11; j++) // Se cambió j=i a j=i+1 para evitar comparar el elemento consigo mismo
+        {
+            if (vec[i] > vec[j]) // Se corrigió la condición para ordenar en forma ascendente
+            {
+                aux = vec[i];
+                vec[i] = vec[j];
+                vec[j] = aux;
+            }
+        }
+    }
+}
+
+void imprimir(int vec[])
+{
+    int i;
+    for (i = 0; i < 11; i++)
+    {
+        cout << vec[i] << " "; // Se corrigió [i] a vec[i] para imprimir el valor del arreglo
+    }
+    cout << endl;
+}
+//////////////////////////////////////
+
+#include <iostream>
+
+using namespace std;
+
+void ordenar(int vec[], int size);
+void imprimir(int vec[], int size);
+
+int main()
+{
+    int size;
+    cout << "Ingrese el tamaño del vector: ";
+    cin >> size;
+
+    int vec[size];
+
+    cout << "Ingrese los " << size << " números del vector: ";
+    for (int i = 0; i < size; i++) {
+        cin >> vec[i];
+    }
+
+    ordenar(vec, size);
+    imprimir(vec, size);
+
+    system ("pause");
+    return 0;
+}
+
+void ordenar(int vec[], int size)
+{
+    int i, j, aux;
+
+    for (i = 0; i < size; i++)
+    {
+        for (j = i + 1; j < size; j++)
+        {
+            if (vec[i] > vec[j])
+            {
+                aux = vec[i];
+                vec[i] = vec[j];
+                vec[j] = aux;
+            }
+        }
+    }
+}
+
+void imprimir(int vec[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout << vec[i] << " ";
+    }
+    cout << endl;
+}
+///////////////////////////////////////////////
+#include <iostream>
+#include <cstdlib> // Para la función rand()
+#include <ctime>   // Para inicializar la semilla de generación de números aleatorios
+
+using namespace std;
+
+void generarNumerosAleatorios(int vec[], int size);
+void imprimirVector(int vec[], int size);
+
+int main()
+{
+    const int size = 5;
+    int vector[size];
+
+    // Inicializar la semilla de generación de números aleatorios
+    srand(time(nullptr));
+
+    // Generar y capturar los números aleatorios en el vector
+    generarNumerosAleatorios(vector, size);
+
+    // Imprimir el vector
+    cout << "Vector generado aleatoriamente: ";
+    imprimirVector(vector, size);
+
+    system ("pause");
+    return 0;
+}
+
+// Función para generar números aleatorios y almacenarlos en el vector
+void generarNumerosAleatorios(int vec[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        vec[i] = rand() % 100; // Genera números aleatorios entre 0 y 99
+    }
+}
+
+// Función para imprimir el vector
+void imprimirVector(int vec[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout << vec[i] << " ";
+    }
+    cout << endl;
+}
+/////////////////////////////////////
