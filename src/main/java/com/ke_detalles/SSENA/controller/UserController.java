@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.ke_detalles.SSENA.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +23,9 @@ public class UserController {
     private Userservice userService;
     
     @PostMapping("/signup")
-    public ResponseEntity<Object> signup(@RequestBody SignupRequest signupRequest) {
+    public ResponseEntity<Object> signup(@RequestBody User signupRequest) {
        
-        if (userService.existsByUsername(signupRequest.getUsername())) {
+        if (userService.findUserByAccount(signupRequest.getUsername()) != null) {
             return ResponseEntity.badRequest().body("El nombre de usuario ya está en uso");
         }
         
@@ -30,7 +34,7 @@ public class UserController {
         newUser.setUsername(signupRequest.getUsername());
         newUser.setPassword(signupRequest.getPassword()); 
       
-        User savedUser = userService.save(newUser);
+        User savedUser = userService.saveUser(newUser);
         
         
         return ResponseEntity.ok(savedUser);

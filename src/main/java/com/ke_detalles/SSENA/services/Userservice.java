@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import com.ke_detalles.SSENA.dao.UserDao;
 import com.ke_detalles.SSENA.entity.User;
 
-//import java.util.List;
+import java.util.List;
 
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 //import com.ke_detalles.SSENA.dao.UserRepository;
-//import com.ke_detalles.SSENA.entity.User;
+import com.ke_detalles.SSENA.entity.User;
 
 @Service
 public class Userservice {
@@ -36,6 +36,11 @@ public class Userservice {
 
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
+    }
+    
+    public User findUserByAccount(String account) {
+        //TO-DO implementar consulta tabla users por la columna username
+        return null;
     }
 
 }

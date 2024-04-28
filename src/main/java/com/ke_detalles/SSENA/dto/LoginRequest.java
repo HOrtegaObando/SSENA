@@ -1,6 +1,6 @@
 package com.ke_detalles.SSENA.dto;
 
-public class LoginRequest {
+/*public class LoginRequest {
     private String username;
     private String password;
 
@@ -30,4 +30,4 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-}
+}*/
