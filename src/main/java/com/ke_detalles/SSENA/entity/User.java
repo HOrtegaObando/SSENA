@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "users") // Nombre de la tabla en la base de datos
@@ -21,8 +22,17 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Transient
+    private String confirmPassword;    
     // Otros campos relevantes para el usuario, como nombre, correo electrónico, roles, etc.
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
     // Constructor vacío (necesario por JPA)
     public User() {
     }

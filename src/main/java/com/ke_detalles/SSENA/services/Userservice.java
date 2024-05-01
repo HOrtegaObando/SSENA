@@ -8,14 +8,6 @@ import org.springframework.stereotype.Service;
 import com.ke_detalles.SSENA.dao.UserDao;
 import com.ke_detalles.SSENA.entity.User;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-//import com.ke_detalles.SSENA.dao.UserRepository;
-import com.ke_detalles.SSENA.entity.User;
-
 @Service
 public class Userservice {
 

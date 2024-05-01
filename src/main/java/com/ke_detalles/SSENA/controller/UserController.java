@@ -24,13 +24,16 @@ public class UserController {
     
     @PostMapping("/signup")
     public ResponseEntity<Object> signup(@RequestBody User signupRequest) {
-       
+    	//verifico si el nombre de usuario está en uso
         if (userService.findUserByAccount(signupRequest.getUsername()) != null) {
             return ResponseEntity.badRequest().body("El nombre de usuario ya está en uso");
         }
+        if (!signupRequest.getPassword().equals(signupRequest.getConfirmPassword())) {
+            return ResponseEntity.badRequest().body("Las contraseñas no coinciden");
+        }
         
-        
-        User newUser = new User();
+  
+     User newUser = new User();
         newUser.setUsername(signupRequest.getUsername());
         newUser.setPassword(signupRequest.getPassword()); 
       
@@ -38,5 +41,6 @@ public class UserController {
         
         
         return ResponseEntity.ok(savedUser);
+       
     }
 }
