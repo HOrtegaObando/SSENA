@@ -34,5 +34,9 @@ public class Userservice {
         //TO-DO implementar consulta tabla users por la columna username
         return null;
     }
+    
+    public User getUserAndPassword(User user) {
+        return userRepository.findByUserAndPassword(user.getUsername(), user.getPassword());
+    }
 
 }
