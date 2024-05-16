@@ -4,61 +4,68 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table; // Import for @Table annotation
 
 @Entity
+@Table(name = "productos") // Add the @Table annotation with the table name
 public class Producto {
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
 
-	    private String nombre;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-	    private int cantidadDisponible;
+  @Column(name = "nombre", nullable = false, length = 50)
+  private String nombre;
 
-	    private double precio;
+  @Column(name = "cantidadDisponible", nullable = false)
+  private int cantidadDisponible;
 
-	    // Constructor vacío
-	    public Producto() {
-	    }
+  @Column(name = "precio", nullable = false)
+  private double precio;
 
-	    // Constructor con parámetros
-	    public Producto(String nombre, int cantidadDisponible, double precio) {
-	        this.nombre = nombre;
-	        this.cantidadDisponible = cantidadDisponible;
-	        this.precio = precio;
-	    }
+  // Constructor vacío
+  public Producto() {
+  }
 
-	    // Getters y setters
-	    public Long getId() {
-	        return id;
-	    }
+  // Constructor con parámetros
+  public Producto(String nombre, int cantidadDisponible, double precio) {
+    this.nombre = nombre;
+    this.cantidadDisponible = cantidadDisponible;
+    this.precio = precio;
+  }
 
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
+  // Getters y setters
+  public Long getId() {
+    return id;
+  }
 
-	    public String getNombre() {
-	        return nombre;
-	    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	    public void setNombre(String nombre) {
-	        this.nombre = nombre;
-	    }
+  public String getNombre() {
+    return nombre;
+  }
 
-	    public int getCantidadDisponible() {
-	        return cantidadDisponible;
-	    }
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
 
-	    public void setCantidadDisponible(int cantidadDisponible) {
-	        this.cantidadDisponible = cantidadDisponible;
-	    }
+  public int getCantidadDisponible() {
+    return cantidadDisponible;
+  }
 
-	    public double getPrecio() {
-	        return precio;
-	    }
+  public void setCantidadDisponible(int cantidadDisponible) {
+    this.cantidadDisponible = cantidadDisponible;
+  }
 
-	    public void setPrecio(double precio) {
-	        this.precio = precio;
-	    }
+  public double getPrecio() {
+    return precio;
+  }
+
+  public void setPrecio(double precio) {
+    this.precio = precio;
+  }
 
 }

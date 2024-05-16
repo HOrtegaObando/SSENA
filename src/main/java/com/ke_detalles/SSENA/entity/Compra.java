@@ -12,72 +12,83 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Compra {
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
 
-	    @ManyToOne
-	    @JoinColumn(name = "producto_id", nullable = false)
-	    private Producto producto;
-	    
-	    private int cantidad;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-	    private BigDecimal precioTotal;
+  @ManyToOne
+  @JoinColumn(name = "person_id", nullable = false) // Modifica el nombre de la columna si es necesario
+  private Person person;  // Propiedad para la relación uno-a-varios
 
-	    private LocalDateTime fechaCompra;
+  private Producto producto;
 
-	    // Constructor vacío
-	    public Compra() {
-	    }
+  private int cantidad;
 
-	    // Constructor con parámetros
-	    
-	    public Compra(Producto producto, int cantidad, BigDecimal precioTotal, LocalDateTime fechaCompra) {
-	        this.producto = producto;
-	        this.cantidad = cantidad;
-	        this.precioTotal = precioTotal;
-	        this.fechaCompra = fechaCompra;
-	    }
+  private BigDecimal precioTotal;
 
-	    // Getters y setters
-	    public Long getId() {
-	        return id;
-	    }
+  private LocalDateTime fechaCompra;
 
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
+  // Constructor vacío
+  public Compra() {
+  }
 
-	    public Producto getProducto() {
-	        return producto;
-	    }
+  // Constructor con parámetros
 
-	    public void setProducto(Producto producto) {
-	        this.producto = producto;
-	    }
+  public Compra(Producto producto, int cantidad, BigDecimal precioTotal, LocalDateTime fechaCompra) {
+    this.producto = producto;
+    this.cantidad = cantidad;
+    this.precioTotal = precioTotal;
+    this.fechaCompra = fechaCompra;
+  }
 
-	    public int getCantidad() {
-	        return cantidad;
-	    }
+  // Getters y setters
+  public Long getId() {
+    return id;
+  }
 
-	    public void setCantidad(int cantidad) {
-	        this.cantidad = cantidad;
-	    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	    public BigDecimal getPrecioTotal() {
-	        return precioTotal;
-	    }
+  public Person getPerson() {
+    return person;
+  }
 
-	    public void setPrecioTotal(BigDecimal precioTotal) {
-	        this.precioTotal = precioTotal;
-	    }
+  public void setPerson(Person person) {
+    this.person = person;
+  }
 
-	    public LocalDateTime getFechaCompra() {
-	        return fechaCompra;
-	    }
+  public Producto getProducto() {
+    return producto;
+  }
 
-	    public void setFechaCompra(LocalDateTime fechaCompra) {
-	        this.fechaCompra = fechaCompra;
-	    }
+  public void setProducto(Producto producto) {
+    this.producto = producto;
+  }
+
+  public int getCantidad() {
+    return cantidad;
+  }
+
+  public void setCantidad(int cantidad) {
+    this.cantidad = cantidad;
+  }
+
+  public BigDecimal getPrecioTotal() {
+    return precioTotal;
+  }
+
+  public void setPrecioTotal(BigDecimal precioTotal) {
+    this.precioTotal = precioTotal;
+  }
+
+  public LocalDateTime getFechaCompra() {
+    return fechaCompra;
+  }
+
+  public void setFechaCompra(LocalDateTime fechaCompra) {
+    this.fechaCompra = fechaCompra;
+  }
 
 }

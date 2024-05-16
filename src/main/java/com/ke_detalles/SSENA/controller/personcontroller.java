@@ -71,22 +71,21 @@ public class personcontroller {
 	public ResponseEntity<Object> update(@RequestBody Person updatedPerson, @PathVariable Long id){ 
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    try {
-	        // Buscar la persona actual en la base de datos
+	       
 	        Person currentPerson = personService.findById(id);
 	        
-	        // Actualizar los campos de la persona actual con los valores de la persona actualizada
-	        currentPerson.setName(updatedPerson.getName());
-	        currentPerson.setAddress(updatedPerson.getAddress());
-	        currentPerson.setPhone(updatedPerson.getPhone()); 
+	        currentPerson.setName(updatedPerson.getName()); // Correcto
+	        currentPerson.setAddress(updatedPerson.getAddress()); // Correcto
+	        currentPerson.setPhone(updatedPerson.getPhone()); // Correcto
 	        
-	        // Guardar la persona actualizada en la base de datos
+	        
 	        Person res = personService.save(currentPerson);
 	        
-	        // Devolver la respuesta con la persona actualizada
+	       
 	        return new ResponseEntity<Object>(res, HttpStatus.OK);
 	    } 
 	    catch (Exception e) {
-	        // Manejo de excepciones
+	       
 	        map.put("message", e.getMessage());
 	        return new ResponseEntity<>(map, HttpStatus.INTERNAL_SERVER_ERROR);
 	    } 

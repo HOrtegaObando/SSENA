@@ -1,86 +1,107 @@
-// Importaciones necesarias para la clase
 package com.ke_detalles.SSENA.entity;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
 import java.io.Serializable;
-import java.util.Date; // Importa Date de java.util en lugar de java.sql
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+// Remove unnecessary import
+// import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne; // Import for @ManyToOne
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
-
-
-// Definición de la entidad Person
 @Entity
-@Table(name="persons") // Especifica el nombre de la tabla en la base de datos
-public class Person implements Serializable { // Implementa Serializable para soportar serialización
-	
-	private static final long serialVersionUID = 1L; // Identificador único de la versión serializada
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) // Genera automáticamente la clave primaria
-	@Column(name="id") // Mapea el campo id en la base de datos
-	private long id;
-	
-	@NotBlank // Valida que el campo no esté en blanco
-	@Column(name="name") // Mapea el campo name en la base de datos
-	private String name;
-	
-	@Column(name = "address") // Mapea el campo address en la base de datos
-	private String address;
-	
-	@Column(name = "phone") // Mapea el campo phone en la base de datos
-	private Integer phone;
-	
-	@Column(name="created_at") // Mapea el campo created_at en la base de datos
-	@CreatedDate // Indica que se generará automáticamente la fecha de creación
-	private Date createdAt; // Almacena la fecha de creación de la entidad
+@Table(name = "persons")
+public class Person implements Serializable {
 
-	public long getId() {
-		return id;
-	}
+    private static final long serialVersionUID = 1L;
 
-	public String getName() {
-		return name;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
 
-	public String getAddress() {
-		return address;
-	}
+    @NotBlank
+    @Column(name = "name")
+    private String name;
 
-	public Integer getPhone() {
-		return phone;
-	}
+    @Column(name = "address")
+    private String address;
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+    @Column(name = "phone")
+    private Integer phone;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    @Column(name = "created_at")
+    @CreatedDate
+    private Date createdAt;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    // Relación uno-a-varios con Compra
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Compra> compras;
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    // Relación uno-a-muchos con User (opcional)
+    @ManyToOne // Replace with @ManyToOne if you have a User entity
+    @JoinColumn(name = "user_id") // Optional for ManyToOne
+    private User user;  // Replace with your User class if applicable
 
-	public void setPhone(Integer phone) {
-		this.phone = phone;
-	}
+    // Getters
+    public String getName() {
+        return name;
+    }
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	// Getters y setters para acceder a los campos privados
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+
+    public void setCreatedAt(Date date) {
+        this.createdAt = date;
+    }
+
+    public void setUser(User newUser) {
+        this.user = newUser;
+    }
+
+    // Getters and Setters for compras (Optional)
+    public List<Compra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
+    }
 }
