@@ -1,23 +1,27 @@
 package com.ke_detalles.SSENA.servicio;
 
+import com.ke_detalles.SSENA.controller.CompraRequest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.ke_detalles.SSENA.entity.Compra;
 import com.ke_detalles.SSENA.entity.Producto;
+import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CompraServiceImpl implements CompraService {
 
     @Override
-    public Compra realizarCompra(Producto producto, int cantidad) {
+    public Compra realizarCompra(CompraRequest compraRequest) {
         /* Implementación de la lógica para realizar la compra
         Por ejemplo, puedes crear una nueva instancia de Compra con los parámetros proporcionados
          y devolverla*/
+        
     	Compra compra = new Compra(
-    		    producto,
-    		    cantidad,
-    		    calcularPrecioTotal(BigDecimal.valueOf(producto.getPrecio()), cantidad),
-    		    LocalDateTime.now()
+    		    compraRequest.getProducto(),
+    		    calcularPrecioTotal(compraRequest.getProducto()),
+    		    LocalDateTime.now(),compraRequest.getPerson()
     	);
         return compra;
     }
@@ -29,9 +33,15 @@ public class CompraServiceImpl implements CompraService {
     }
 
     /* Método auxiliar para calcular el precio total de la compra*/
-    private BigDecimal calcularPrecioTotal(BigDecimal precioUnitario, int cantidad) {
-        BigDecimal cantidadBigDecimal = BigDecimal.valueOf(cantidad);
-        return precioUnitario.multiply(cantidadBigDecimal);
+    private BigDecimal calcularPrecioTotal(List<Producto> producto) {
+        
+        double sumPrecio = 0.0; 
+        for (Producto item : producto) {
+            sumPrecio = sumPrecio + (item.getPrecio()*item.getCantidadSeleccionada());
+        }
+        
+        BigDecimal cantidadBigDecimal = BigDecimal.valueOf(sumPrecio);
+        return cantidadBigDecimal;
     }
     
 }

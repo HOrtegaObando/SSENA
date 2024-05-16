@@ -1,10 +1,13 @@
 package com.ke_detalles.SSENA.controller;
 
+import com.ke_detalles.SSENA.entity.Person;
 import com.ke_detalles.SSENA.entity.Producto;
+import java.util.List;
 
 public class CompraRequest {
 
-    private Producto producto;
+    private Person person;
+    private List<Producto> producto;
     private int cantidad;
 
     // Constructor, getters y setters
@@ -12,16 +15,25 @@ public class CompraRequest {
     public CompraRequest() {
     }
 
-    public CompraRequest(Producto producto, int cantidad) {
+    public CompraRequest(List<Producto> producto, int cantidad, Person person) {
         this.producto = producto;
         this.cantidad = cantidad;
+        this.person = person;
     }
 
-    public Producto getProducto() {
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public List<Producto> getProducto() {
         return producto;
     }
 
-    public void setProducto(Producto producto) {
+    public void setProducto(List<Producto> producto) {
         this.producto = producto;
     }
 

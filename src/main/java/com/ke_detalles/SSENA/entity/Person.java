@@ -15,8 +15,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne; // Import for @ManyToOne
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -50,11 +50,15 @@ public class Person implements Serializable {
     private List<Compra> compras;
 
     // Relación uno-a-muchos con User (opcional)
-    @ManyToOne // Replace with @ManyToOne if you have a User entity
+    @OneToOne // Replace with @ManyToOne if you have a User entity
     @JoinColumn(name = "user_id") // Optional for ManyToOne
     private User user;  // Replace with your User class if applicable
-
+ 
     // Getters
+    public long getId() {
+        return id;
+    }
+   
     public String getName() {
         return name;
     }
@@ -76,6 +80,10 @@ public class Person implements Serializable {
     }
 
     // Setters
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }

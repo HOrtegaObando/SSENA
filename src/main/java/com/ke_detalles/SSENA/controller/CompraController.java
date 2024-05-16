@@ -6,10 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.ke_detalles.SSENA.entity.Compra;
 import com.ke_detalles.SSENA.servicio.CompraService;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@CrossOrigin
 public class CompraController {
-	
-	@Autowired
+    
+    @Autowired
     private CompraService compraService;
     
     @PostMapping("/compras")
@@ -18,7 +22,7 @@ public class CompraController {
         // Por ejemplo, podrías verificar si el producto y la cantidad son válidos
         
         // Llamar al servicio de compra para realizar la compra
-        Compra compra = compraService.realizarCompra(compraRequest.getProducto(), compraRequest.getCantidad());
+        Compra compra = compraService.realizarCompra(compraRequest);
         
         // Devolver la respuesta al cliente
         return ResponseEntity.ok(compra);

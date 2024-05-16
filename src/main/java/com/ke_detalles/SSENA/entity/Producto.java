@@ -5,67 +5,93 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table; // Import for @Table annotation
 
 @Entity
-@Table(name = "productos") // Add the @Table annotation with the table name
+@Table(name = "producto") // Add the @Table annotation with the table name
 public class Producto {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "nombre", nullable = false, length = 50)
-  private String nombre;
+    @Column(name = "nombre", nullable = false, length = 50)
+    private String nombre;
 
-  @Column(name = "cantidadDisponible", nullable = false)
-  private int cantidadDisponible;
+    @Column(name = "cantidad_disponible", nullable = false)
+    private int cantidadDisponible;
 
-  @Column(name = "precio", nullable = false)
-  private double precio;
+    @Column(name = "precio", nullable = false)
+    private double precio;
+    
+    @Column(name = "cantidad_seleccionada", nullable = false)
+    private int cantidadSeleccionada;
 
-  // Constructor vacío
-  public Producto() {
-  }
+    @ManyToOne
+    @JoinColumn(name = "compra_id", nullable = false)
+    private Compra compra;
 
-  // Constructor con parámetros
-  public Producto(String nombre, int cantidadDisponible, double precio) {
-    this.nombre = nombre;
-    this.cantidadDisponible = cantidadDisponible;
-    this.precio = precio;
-  }
+    // Constructor vacío
+    public Producto() {
+    }
 
-  // Getters y setters
-  public Long getId() {
-    return id;
-  }
+    // Constructor con parámetros
+    public Producto(Compra compra, String nombre, int cantidadDisponible, double precio) {
+        this.nombre = nombre;
+        this.cantidadDisponible = cantidadDisponible;
+        this.precio = precio;
+        this.compra = compra;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    // Getters y setters
+    public Long getId() {
+        return id;
+    }
 
-  public String getNombre() {
-    return nombre;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
+    public String getNombre() {
+        return nombre;
+    }
 
-  public int getCantidadDisponible() {
-    return cantidadDisponible;
-  }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-  public void setCantidadDisponible(int cantidadDisponible) {
-    this.cantidadDisponible = cantidadDisponible;
-  }
+    public int getCantidadDisponible() {
+        return cantidadDisponible;
+    }
 
-  public double getPrecio() {
-    return precio;
-  }
+    public void setCantidadDisponible(int cantidadDisponible) {
+        this.cantidadDisponible = cantidadDisponible;
+    }
 
-  public void setPrecio(double precio) {
-    this.precio = precio;
-  }
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    }
+    
+    public int getCantidadSeleccionada() {
+        return cantidadSeleccionada;
+    }
+
+    public void setCantidadSeleccionada(int cantidadSeleccionada) {
+        this.cantidadSeleccionada = cantidadSeleccionada;
+    }
 
 }

@@ -1,5 +1,7 @@
 package com.ke_detalles.SSENA.entity;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -9,8 +11,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.util.List;
 
 @Entity
+@Table(name = "compra")
 public class Compra {
 
   @Id
@@ -21,12 +27,13 @@ public class Compra {
   @JoinColumn(name = "person_id", nullable = false) // Modifica el nombre de la columna si es necesario
   private Person person;  // Propiedad para la relación uno-a-varios
 
-  private Producto producto;
+  @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
+  private List<Producto> producto;
 
-  private int cantidad;
-
+  @Column(name = "precio_total")
   private BigDecimal precioTotal;
 
+  @Column(name = "fecha_compra")
   private LocalDateTime fechaCompra;
 
   // Constructor vacío
@@ -35,9 +42,9 @@ public class Compra {
 
   // Constructor con parámetros
 
-  public Compra(Producto producto, int cantidad, BigDecimal precioTotal, LocalDateTime fechaCompra) {
+  public Compra(List<Producto> producto, BigDecimal precioTotal, LocalDateTime fechaCompra, Person person) {
+    this.person = person;
     this.producto = producto;
-    this.cantidad = cantidad;
     this.precioTotal = precioTotal;
     this.fechaCompra = fechaCompra;
   }
@@ -59,20 +66,12 @@ public class Compra {
     this.person = person;
   }
 
-  public Producto getProducto() {
+  public List<Producto> getProducto() {
     return producto;
   }
 
-  public void setProducto(Producto producto) {
+  public void setProducto(List<Producto> producto) {
     this.producto = producto;
-  }
-
-  public int getCantidad() {
-    return cantidad;
-  }
-
-  public void setCantidad(int cantidad) {
-    this.cantidad = cantidad;
   }
 
   public BigDecimal getPrecioTotal() {
